@@ -12,7 +12,7 @@
 const modelValue = defineModel<string>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue' | 'input', value: string): void
+  (e: 'update:modelValue', value: string): void
 }>()
 
 const handleInput = (e: Event) => {

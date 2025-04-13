@@ -31,12 +31,13 @@ import { useOrdersChannel } from '@/composables/useOrdersChannel'
 const searchQuery = ref('')
 const page = ref(1)
 const ordersPerPage = ref(10)
+const debouncedSearchQuery = ref('')
 
 const { data, refresh, status } = useFetch('/api/orders', {
   query: {
     page,
     per_page: ordersPerPage,
-    search: searchQuery.value,
+    search: debouncedSearchQuery,
   },
 })
 
@@ -46,7 +47,7 @@ const handlePerPageChange = (value: number) => {
 }
 
 const debouncedSearch = debounce(() => {
-  refresh()
+  debouncedSearchQuery.value = searchQuery.value
 }, 700)
 
 watch(searchQuery, () => {

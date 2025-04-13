@@ -7,8 +7,8 @@
         <tr>
           <th class="px-4 py-2 text-left">ID</th>
           <th class="px-4 py-2 text-left">Client</th>
-          <th class="px-4 py-2 text-left">Status</th>
           <th class="px-4 py-2 text-left">Order number</th>
+          <th class="px-4 py-2 text-left">Status</th>
           <th class="px-4 py-2 text-left">Amount</th>
           <th class="px-4 py-2 text-left">Data</th>
         </tr>

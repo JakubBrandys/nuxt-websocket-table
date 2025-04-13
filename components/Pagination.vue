@@ -3,11 +3,7 @@
     <div class="text-sm flex items-center gap-2">
       <span>Per page:</span>
       <select class="border px-2 py-1 rounded" @change="handlePerPageChange">
-        <option
-          v-for="option in props.perPageOptions ?? [10, 20, 50]"
-          :key="option"
-          :value="option"
-        >
+        <option v-for="option in perPageOptions" :key="option" :value="option">
           {{ option }}
         </option>
       </select>
@@ -50,8 +46,8 @@ const modelValue = defineModel<number>({ default: 1 })
 
 const props = defineProps<{
   totalPages: number
+  perPageOptions: number[]
   maxVisible?: number
-  perPageOptions?: number[]
 }>()
 
 const emit = defineEmits<{
