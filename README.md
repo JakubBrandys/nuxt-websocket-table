@@ -1,4 +1,4 @@
-# 🧾 Zendo – Orders List App
+# 🧾 Orders List App
 
 🎯 **Goal**: Build an intuitive order listing interface using Vue/Nuxt + Tailwind
 
