@@ -6,7 +6,13 @@
     </div>
     <OrderTable :orders="data.data" :loading="status === 'pending'" />
     <div class="mt-6 flex justify-center">
-      <Pagination v-model="page" :total-pages="data.meta.last_page" :max-visible="5" />
+      <Pagination
+        v-model="page"
+        :total-pages="data.meta.last_page"
+        :max-visible="5"
+        :per-page-options="[10, 20, 30]"
+        @update:per-page="handlePerPageChange"
+      />
     </div>
     <div class="mt-6 flex justify-center">
       <Button @click="simulateUpdate"> Simulate Update </Button>
@@ -32,6 +38,11 @@ const { data, refresh, status } = useFetch('/api/orders', {
     search: searchQuery.value,
   },
 })
+
+const handlePerPageChange = (value: number) => {
+  ordersPerPage.value = value
+  page.value = 1
+}
 
 const debouncedSearch = debounce(() => {
   refresh()
