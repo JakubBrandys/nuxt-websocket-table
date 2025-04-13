@@ -2,11 +2,12 @@
   <div class="w-full flex md:flex-row items-center justify-between gap-4">
     <div class="text-sm flex items-center gap-2">
       <span>Per page:</span>
-      <select
-        class="border px-2 py-1 rounded"
-        @change="handlePerPageChange"
-      >
-        <option v-for="option in props.perPageOptions ?? [10, 20, 50]" :key="option" :value="option">
+      <select class="border px-2 py-1 rounded" @change="handlePerPageChange">
+        <option
+          v-for="option in props.perPageOptions ?? [10, 20, 50]"
+          :key="option"
+          :value="option"
+        >
           {{ option }}
         </option>
       </select>
@@ -54,8 +55,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: number): void
-  (e: 'update:perPage', value: number): void
+  (e: 'update:modelValue' | 'update:perPage', value: number): void
 }>()
 
 const updatePage = (page: number) => {

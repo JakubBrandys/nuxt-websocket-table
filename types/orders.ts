@@ -1,4 +1,4 @@
-interface Order {
+export interface Order {
   id: number
   order_number: string
   total_amount: string
@@ -14,7 +14,7 @@ interface PaginationMeta {
   total: number
 }
 
-interface OrdersResponse {
+export interface OrdersResponse {
   data: Order[]
   meta: PaginationMeta
 }

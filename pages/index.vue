@@ -4,11 +4,11 @@
     <div class="mb-4">
       <BaseInput v-model="searchQuery" />
     </div>
-    <OrderTable :orders="data.data" :loading="status === 'pending'" />
+    <OrderTable :orders="data?.data ?? []" :loading="status === 'pending'" />
     <div class="mt-6 flex justify-center">
       <Pagination
         v-model="page"
-        :total-pages="data.meta.last_page"
+        :total-pages="data?.meta.last_page ?? 0"
         :max-visible="5"
         :per-page-options="[10, 20, 30]"
         @update:per-page="handlePerPageChange"
@@ -22,10 +22,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { FetchError } from 'ofetch'
 import { useFetch } from '#app'
 import { debounce } from '@/utils/debounce'
 import OrderTable from '@/components/OrderTable.vue'
-import type { FetchError } from 'ofetch'
+import { useOrdersChannel } from '@/composables/useOrdersChannel'
 
 const searchQuery = ref('')
 const page = ref(1)
@@ -52,14 +53,17 @@ watch(searchQuery, () => {
   debouncedSearch()
 })
 
+useOrdersChannel(() => {
+  refresh()
+})
+
 const simulateUpdate = async () => {
   try {
     await $fetch('/api/simulate-update', { method: 'POST' })
-    alert('Order simulation completed successfully.')
   } catch (err) {
     const error = err as FetchError<{ message?: string }>
 
-    const message = error.data?.message || 'An unexpected error occurred during order simulation.'
+    const message = error.data?.message
 
     alert(`Error: ${message}`)
   }

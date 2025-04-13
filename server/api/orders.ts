@@ -1,3 +1,5 @@
+import type { OrdersResponse } from '~/types/orders'
+
 export default defineEventHandler(async (event): Promise<OrdersResponse> => {
   const config = useRuntimeConfig()
   const { page, per_page, search } = getQuery(event)
