@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
     })
 
     return { success: true }
-
   } catch (err: unknown) {
     throw createError({
       statusCode: 500,
